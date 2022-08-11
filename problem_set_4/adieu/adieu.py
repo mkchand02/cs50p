@@ -5,3 +5,20 @@ Adieu, adieu, to Liesl
 Adieu, adieu, to Liesl and Friedrich
 Adieu, adieu, to Liesl, Friedrich, and Louisa
 """
+
+import inflect
+
+p = inflect.engine()
+total_names = []
+final_str = "Adieu, adieu, to "
+while True:
+    try:
+        name = input("enter :")
+        total_names.append(name)
+    except EOFError:
+        #Break when eof error occurs
+        break
+
+name_str = p.join(total_names)
+final_str = final_str + name_str
+print(final_str)
