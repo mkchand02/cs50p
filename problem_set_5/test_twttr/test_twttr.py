@@ -4,7 +4,7 @@ Then, in a file called test_twttr.py, implement one or more functions that colle
 
 from twttr import shorten
 
-
+#check if shorten removes vowels for alphabets
 def test_upper():
     assert shorten("HELLO") == "HLL"
     assert shorten("HEY WORLD") == "HY WRLD"
