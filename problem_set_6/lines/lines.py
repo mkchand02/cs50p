@@ -24,7 +24,7 @@ def main():
 
 def get_LOC(filename):
     try:
-        with open(filename) as file:
+        with open(filename, 'r') as file:
             count = 0
             is_part_of_single_quote_comment = False
             is_part_of_double_quote_comment = False
@@ -62,7 +62,7 @@ def get_LOC(filename):
                         line == ''
                 ):  # and not line.startswith("'") and not line.startswith('"') \
                     count += 1
-            return count
+        return count
     except FileNotFoundError:
         sys.exit("File does not exist")
 
