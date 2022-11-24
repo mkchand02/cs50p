@@ -18,3 +18,44 @@ if the specified input does not exist.
 Assume that the input will be a photo of someone posing in just the right way, like these demos, so that, when they’re resized and cropped, the shirt appears to fit perfectly.
 """
 
+import sys
+from os.path import splitext
+from PIL import Image, ImageOps
+
+
+def main():
+    """driver code"""
+    is_valid_args(sys.argv)
+    read_file = sys.argv[1]
+    write_file = sys.argv[2]
+    shirt = "shirt.png"
+    try:
+        with Image.open(shirt) as shirt_file:
+            with Image.open(read_file) as muppet:
+                muppet = ImageOps.fit(muppet, shirt_file.size)
+                muppet.paste(shirt_file, shirt_file)
+                muppet.save(write_file)
+    except FileNotFoundError:
+        sys.exit("Input does not exist")
+
+
+def is_valid_args(args):
+    """Checking if cmd-line args are valid or not"""
+    if len(args) < 3:
+        sys.exit("Too few command-line arguments")
+    elif len(args) > 3:
+        sys.exit("Too many command-line arguments")
+    read_file_ext = splitext(args[1].lower())[1]
+    write_file_ext = splitext(args[2].lower())[1]
+    if read_file_ext != write_file_ext:
+        sys.exit("Input and output have different extensions")
+    if not (read_file_ext == ".jpg") and not (
+            read_file_ext == ".jpeg") and not (read_file_ext == ".png"):
+        sys.exit("Invalid input")
+    if not (write_file_ext == ".jpg") and not (
+            write_file_ext == ".jpeg") and not (write_file_ext == ".png"):
+        sys.exit("Invalid output")
+
+
+if __name__ == "__main__":
+    main()
