@@ -15,10 +15,15 @@ def main():
 
 
 def validate(ip):
-    ...
-
-
-...
+    pattern = re.search(r"^(\d\d?\d?)\.(\d\d?\d?)\.(\d\d?\d?)\.(\d\d?\d?)$", ip)
+    if pattern:
+        for integer in pattern.groups():
+            integer = int(integer)
+            if not (0 <= integer <= 255): # if not a valid ip, return false
+                return False
+        return True
+    return False # return false if pattern doesn't match
+        
 
 
 if __name__ == "__main__":
