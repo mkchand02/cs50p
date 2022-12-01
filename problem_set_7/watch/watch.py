@@ -18,16 +18,22 @@ Structure watch.py as follows, wherein you’re welcome to modify main and/or im
 import re
 import sys
 
+url_prefix = "https://youtu.be/"
 
 def main():
     print(parse(input("HTML: ")))
 
 
 def parse(s):
-    ...
-
-
-...
+    # regex to match iframe in html element
+    has_iframe = re.search(r"^<iframe.*></iframe>", s)
+    if has_iframe:
+        #regex for checking if youtube link as part of src and in proper order
+        pattern_match = re.search(r'src="https?://(www\.)?youtube.com/embed/(\w+)"', s) 
+        # if match exists and req str is not None, return the req str
+        if pattern_match and pattern_match.group(2):
+            return url_prefix + pattern_match.group(2)
+    #else return None
 
 if __name__ == "__main__":
     main()
