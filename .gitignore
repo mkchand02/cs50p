@@ -1,7 +1,14 @@
 #.gitignore refrenced from: https://github.com/github/gitignore/blob/main/Python.gitignore
 
+#ignore jpg, jpeg, png, csv files
+*.csv
+*.png
+*.jpg
+*.jpeg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 
