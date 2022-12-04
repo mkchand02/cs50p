@@ -13,10 +13,9 @@ def main():
 
 
 def count(s):
-    ...
-
-
-...
+    """counts the no. of times um occurs in the string. Check is done case-insensitively"""
+    pattern_list = re.findall(r"\bum\b", s, re.IGNORECASE)
+    return len(pattern_list) if pattern_list else 0
 
 
 if __name__ == "__main__":
