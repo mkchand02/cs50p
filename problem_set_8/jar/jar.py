@@ -9,23 +9,43 @@ size should return the number of cookies actually in the cookie jar.
 Structure your class per the below. You may not alter these methods’ parameters, but you may add your own methods.
 """
 
+
 class Jar:
     def __init__(self, capacity=12):
-        ...
+        if capacity < 0:
+            raise ValueError
+        self.capacity = capacity
+        self.size = 0
 
     def __str__(self):
-        ...
+        return "🍪" * self.size
 
     def deposit(self, n):
-        ...
+        if n <= 0:
+            raise ValueError(f"Expected amount to be deposited > 0; Received {n}")
+        if self.size + n > self.capacity:
+            raise ValueError(f"Number of Cookies deposited in jar cannot exceed its capacity")
+        self.size += n
 
     def withdraw(self, n):
-        ...
+        if n <= 0:
+            raise ValueError(f"Expected amount to be deposited > 0; Received {n}")
+        if self.size < n:
+            raise ValueError(f"Number of Cookies withdrawn from jar cannot exceed be more than size")
+        self.size -= n
 
     @property
     def capacity(self):
-        ...
+        return self._capacity
 
     @property
     def size(self):
-        ...
+        return self._size
+
+    @size.setter
+    def size(self, val):
+        self._size = val
+
+    @capacity.setter
+    def capacity(self, val):
+        self._capacity = val
