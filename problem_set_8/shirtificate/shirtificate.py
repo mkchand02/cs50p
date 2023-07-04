@@ -12,23 +12,36 @@ All other details we leave to you. You’re even welcome to add borders, colors,
 """
 from fpdf import FPDF
 
-class PDF(FPDF):
-  def process(self, name, img):
-    #Add a page
-    self.add_page()
-    #Set font
-    self.set_font("Arial", "B", 35)
-    #Add title
-    self.cell(0, 50, "CS50 Shirtificate", new_x = "LMARGIN", new_y = "NEXT", align = "C")
-    #Add the shirt img
-    self.image(img, w = self.epw)
 
-    #Set font and white text color for the next content
-    self.set_font("Arial", "B", 15)
-    self.set_text_color(255, 255, 255)
-    self.cell(200, -240, f"{name} took CS50", new_x = "LMARGIN", new_y = "NEXT", align = "C")
-    #save output as pdf
-    self.output("shirtificate.pdf")
+class PDF(FPDF):
+    def process(self, name, img):
+        """inputs a name and a shirt and saves a pdf of shirt with the name on it"""
+        #Add a page
+        self.add_page()
+        #Set font
+        self.set_font("Arial", "B", 35)
+        #Add title
+        self.cell(0,
+                  50,
+                  "CS50 Shirtificate",
+                  new_x="LMARGIN",
+                  new_y="NEXT",
+                  align="C")
+        #Add the shirt img
+        self.image(img, w=self.epw)
+
+        #Set font and white text color for the next content
+        self.set_font("Arial", "B", 15)
+        self.set_text_color(255, 255, 255)
+        self.cell(200,
+                  -240,
+                  f"{name} took CS50",
+                  new_x="LMARGIN",
+                  new_y="NEXT",
+                  align="C")
+        #save output as pdf
+        self.output("shirtificate.pdf")
+
 
 name = input("Name :")
 img = "shirtificate.png"
